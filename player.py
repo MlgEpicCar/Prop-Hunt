@@ -1,10 +1,18 @@
 import pygame 
+import random
 from settings import *
 
 class Player(pygame.sprite.Sprite):
 	def __init__(self,pos,groups,obstacle_sprites):
 		super().__init__(groups)
-		self.image = pygame.image.load('Sprites/rock.png').convert_alpha()
+
+		# random skin
+		randomnum = random.randint(1,2)
+		if randomnum == 1:
+			self.image = pygame.image.load('Sprites/rock.png').convert_alpha()
+		else:
+			self.image = pygame.image.load('Sprites/watermelon.png').convert_alpha()
+
 		self.rect = self.image.get_rect(topleft = pos)
 		self.hitbox = self.rect.inflate(0,-26)
 
@@ -61,3 +69,5 @@ class Player(pygame.sprite.Sprite):
 	def update(self):
 		self.input()
 		self.move(self.speed)
+
+		# TODO: make object choosable instead of random + add more objects
